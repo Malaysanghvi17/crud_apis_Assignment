@@ -1,0 +1,47 @@
+==> test url to check whether apis are working or not
+
+create record:
+$uri = "http://localhost:7000/employees_3"
+$body = @{
+    "emp_name" = "martin Doe"
+    "job_title" = "devloper"
+    "ph_number" = "9234567890"
+    "email" = "martin.doe@example.com"
+    "address" = "123 Main St"
+    "city" = "los angeles"
+    "state" = "NY"
+    "contact_details" = @(
+        @{
+            "contact_name" = "jack Smith"
+            "contact_ph_number" = "9876543210"
+            "relationship" = "Friend"
+        },
+        @{
+            "contact_name" = "marques brownlee"
+            "contact_ph_number" = "5678901234"
+            "relationship" = "Colleague"
+        }
+    )
+}
+Invoke-RestMethod -Uri $uri -Method POST -ContentType "application/json" -Body ($body | ConvertTo-Json)
+
+list:
+$uri = "http://localhost:7000/employees_3"
+Invoke-RestMethod -Uri $uri -Method GET
+
+
+update:
+Invoke-RestMethod -Uri "http://localhost:7000/employees_3/update/emp_id/1/job_title/java developer" -Method PUT
+
+delete:
+$uri = "http://localhost:7000/employees_3/delete/8"
+Invoke-RestMethod -Uri $uri -Method DELETE
+
+
+get:
+$uri = "http://localhost:7000/employees_3/search/3"
+Invoke-RestMethod -Uri $uri -Method GET
+
+
+
+
